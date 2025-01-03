@@ -1,7 +1,7 @@
-const n = 600851475143
+let n = 600851475143
 const sqrtN = Math.floor(Math.sqrt(n))
 const isPrime = new Array(sqrtN + 1).fill(true)
-let ans = 2
+let ans = 1
 
 for (let i = 2; i <= sqrtN; i++) {
   if (isPrime[i]) {
@@ -9,10 +9,15 @@ for (let i = 2; i <= sqrtN; i++) {
       isPrime[j] = false
     }
 
-    if (n % i == 0) {
-      ans = Math.max(ans, i)
+    while (n % i == 0) {
+      n /= i
+      ans = i
     }
   }
+}
+
+if (n !== 1) {
+  ans = n
 }
 
 console.log(ans)
